@@ -1,0 +1,44 @@
+import xml.etree.ElementTree as ET
+
+# Parse the AndroidManifest.xml file
+tree = ET.parse('AndroidManifest.xml')
+root = tree.getroot()
+
+# Define the namespace used in the AndroidManifest.xml file
+ns = {'android': 'http://schemas.android.com/apk/res/android'}
+
+# Find all the "uses-permission" elements and extract the permission names
+declared_permissions = []
+for uses_permission in root.findall('.//uses-permission'):
+    permission = uses_permission.get(ns['android'] + 'name')
+    declared_permissions.append(permission)
+
+# Find all the "uses-permission" elements in the manifest
+used_permissions = []
+for activity in root.findall('.//activity'):
+    for intent_filter in activity.findall('.//intent-filter'):
+        for action in intent_filter.findall('.//action'):
+            if action.get(ns['android'] + 'name') == 'android.intent.action.MAIN':
+                continue
+            used_permission = action.get(ns['android'] + 'permission')
+            if used_permission:
+                used_permissions.append(used_permission)
+
+# Compute the requiredAndUsed permissions
+required_and_used_permissions = list(set(used_permissions) & set(declared_permissions))
+
+# Compute the requiredButNotUsed permissions
+required_but_not_used_permissions = list(set(declared_permissions) - set(used_permissions))
+
+# Compute the notRequiredButUsed permissions
+not_required_but_used_permissions = list(set(used_permissions) - set(declared_permissions))
+
+# Compute the allTypes permissions
+all_permissions = list(set(declared_permissions) | set(used_permissions))
+
+# Print the extracted permission types
+print("Declared Permissions: ", declared_permissions)
+print("Required and Used Permissions: ", required_and_used_permissions)
+print("Required but Not Used Permissions: ", required_but_not_used_permissions)
+print("Not Required but Used Permissions: ", not_required_but_used_permissions)
+print("All Permissions: ", all_permissions)

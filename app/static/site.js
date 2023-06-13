@@ -1727,7 +1727,7 @@
 
                         //clear sorter arrows
                         $(".tabulator-col[data-sortable=true]", self.header).data("sortdir", "desc");
-                        $(".tabulator-col .tabulator-arrow", self.header).removeClass("asc desc");
+                        //$(".tabulator-col .tabulator-arrow", self.header).removeClass("asc desc");
                         self.activeData = [];
 
                         //update active data to mach rows

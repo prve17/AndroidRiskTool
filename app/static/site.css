@@ -50,6 +50,7 @@ body {
     background: #f6f6f6;
     border: 1px solid rgb(43, 109, 159);
     margin-bottom: 15px;
+    margin-top:15px;
 }
 
 .risk-progress-bar {
@@ -98,7 +99,7 @@ body {
     position: relative;
     border: 1px solid rgb(43, 109, 159);
     border-bottom: 0;
-    background-color: #2980b9;
+    background-color: #f7b268;
     color: #f6f6f6;
     font-weight: bold;
     overflow: hidden;
@@ -261,7 +262,7 @@ body {
 
 .tabulator .tabulator-header .tabulator-col[data-sortable=true]:hover {
     cursor: pointer;
-    background-color: rgb(43, 109, 159);
+    background-color: #f7b268;
 }
 
 .tabulator .tabulator-header .tabulator-col-row-handle {
@@ -410,7 +411,7 @@ body {
 
 .tabulator .tabulator-tableHolder .tabulator-table .tabulator-group .tabulator-group-header span {
     margin-left: 10px;
-    color: #2dda76;
+    color: #981d26;
 }
 
 .tabulator .tabulator-tableHolder .tabulator-table .tabulator-group .tabulator-group-body {
@@ -448,7 +449,7 @@ body {
 }
 
 .tabulator .tabulator-footer .tabulator-page.active {
-    color: #ea6153;
+    color: #d068da;
 }
 
 .tabulator .tabulator-footer .tabulator-page.disabled {

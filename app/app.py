@@ -15,7 +15,7 @@ from sqlalchemy.sql import text
 from werkzeug.exceptions import BadRequest, UnprocessableEntity
 from werkzeug.utils import secure_filename
 
-from RiskInDroid import RiskInDroid
+from AndroidRisk import AndroidRisk
 from model import db, Apk
 
 
@@ -92,11 +92,9 @@ def application_error(error):
 def home():
     return render_template("index.html")
 
-
-@application.route("/results", methods=["GET"], strict_slashes=False)
-def results():
-    return render_template("results.html")
-
+@application.route("/result", methods=["GET"], strict_slashes=False)
+def result():
+    return AndroidRisk.calculate_set_accuracy()
 
 @application.route("/upload", methods=["POST"], strict_slashes=False)
 def upload_apk():
@@ -117,7 +115,7 @@ def upload_apk():
         )
         file.save(file_path)
 
-        rid = RiskInDroid()
+        rid = AndroidRisk()
 
         permissions = rid.get_permission_json(file_path)
 
@@ -162,42 +160,6 @@ def upload_apk():
             raise BadRequest("The uploaded file is not valid")
     else:
         raise UnprocessableEntity("The uploaded file is not valid")
-
-
-@application.route("/apks", methods=["GET"], strict_slashes=False)
-def get_apks():
-
-    query = Apk.query
-
-    if request.args.get("sort") and request.args.get("sort_dir"):
-        query = query.order_by(
-            text(
-                "{0} {1}".format(request.args.get("sort"), request.args.get("sort_dir"))
-            )
-        )
-
-    if request.args.get("namefil"):
-        fil = request.args.get("namefil").replace("%", "\\%").replace("_", "\\_")
-        query = query.filter(Apk.name.ilike("%{0}%".format(fil), "\\"))
-
-    if request.args.get("md5fil"):
-        fil = request.args.get("md5fil").replace("%", "\\%").replace("_", "\\_")
-        query = query.filter(Apk.md5.ilike("%{0}%".format(fil), "\\"))
-
-    if request.args.get("riskfil"):
-        fil = request.args.get("riskfil").replace("%", "\\%").replace("_", "\\_")
-        query = query.filter(cast(Apk.risk, db.String).ilike("%{0}%".format(fil), "\\"))
-
-    pag = query.paginate()
-
-    item_list = []
-
-    for item in pag.items:
-        item_list.append({"name": item.name, "md5": item.md5, "risk": item.risk})
-
-    response = {"current_page": pag.page, "last_page": pag.pages, "data": item_list}
-
-    return make_response(jsonify(response))
 
 
 @application.route("/details", methods=["GET", "POST"], strict_slashes=False)

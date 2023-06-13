@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, minimum-scale=0.75, initial-scale=0.75, maximum-scale=0.75">
 
-    <title>RiskInDroid</title>
+    <title>Risk Analysis of Android application</title>
 
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
@@ -43,35 +43,27 @@
 <div class="container">
     <div class="row limited-row text-center">
         <div class="col-12">
-            <h2 style="margin-top: 70px; margin-bottom: 70px;">RiskInDroid</h2>
+            <h2 style="margin-top: 70px; margin-bottom: 70px;">AndroidRisk</h2>
         </div>
     </div>
 
     <div class="row limited-row" style="text-align: justify;">
-        <label class="col-12"><b>RiskInDroid</b> is a tool for quantitative risk
-            analysis of Android applications based on machine learning techniques.
+        <label class="col-12"><b>AndroidRisk 
+        </b>is a tool for calculating risk factor of Android applications based on machine learning techniques.
             The tool uses classification techniques in order to generate a numeric
-            risk value between 0 and 100 for a given app.
+            risk value between 0 and 10 for a given application.
         </label>
     </div>
 
     <div class="row limited-row text-center btn-row">
-        <div class="col-md-6">
+        <div class="col-md-6 mx-auto">
             <button id="upload-new-app"
-                    class="btn btn-primary d-flex justify-content-center align-content-between col-12">
+                    class="btn btn-primary d-flex justify-content-center align-content-between col-12 " style="background-color: #d76067;">
                 <span>Analyze application</span>
                 <i class="material-icons" style="margin-left: 10px;">adb</i>
             </button>
         </div>
-        <div class="d-md-none" style="min-height: 10px; height: 10px;">&nbsp;</div>
-        <div class="col-md-6">
-            <a href="{{ url_for('results') }}"
-               class="btn btn-success d-flex justify-content-center align-content-between col-12">
-                <span>Experimental results</span>
-                <i class="material-icons"
-                   style="margin-left: 10px;">file_download</i>
-            </a>
-        </div>
+        
     </div>
 
     <div class="row limited-row text-center">
@@ -89,23 +81,12 @@
                          role="progressbar"></div>
                 </div>
             </div>
-            <button id="submit-button" type="submit" class="col-12 btn btn-primary">
+            <button id="submit-button" type="submit" class="col-12 btn btn-primary" style="background-color: #66cdaa;">
                 Submit
             </button>
         </form>
     </div>
 
-    <div class="row limited-row text-center">
-        <div class="col-12">
-            <h6 style="margin-top: 70px;">
-                Source code is available at:
-                <a style="word-wrap: break-word;"
-                   href="https://github.com/ClaudiuGeorgiu/RiskInDroid">
-                    https://github.com/ClaudiuGeorgiu/RiskInDroid
-                </a>
-            </h6>
-        </div>
-    </div>
 </div>
 </body>
 </html>
